@@ -1,0 +1,15 @@
+{
+  "name": "cipher-text",
+  "version": "1.0.0",
+  "description": "Encrypter and decrypter based on aes cbc",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Surya pratap",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/cdns.ejs')%>
+        <title>
+            <%= title%>
+        </title>
+</head>
+
+<body>
+    <%- include('../partials/nav.ejs')%>
+        <center>
+            <form action="/encrypt" method="post" class="form w-50 m-5">
+                <div class="mb-3">
+                    <label for="" class="form-label">Message</label>
+                    <input type="text" class="form-control" name="message" id="" aria-describedby="helpId">
+                    <small id="helpId" class="form-text text-muted">Text To be Encrypted</small>
+                </div>
+                <div class="mb-3">
+                    <h1><span class="badge bg-danger mb-2">Encrypted msg</span> <input type="text" class="form-control"
+                            style="width: 20vw;" name="msg" id="msg" value="<%= encrypted_data%>"
+                            aria-describedby="helpId"></h1>
+
+                </div>
+                <div class="mb-3">
+                    <h1><span class="badge bg-primary mb-2">Key</span><input type="text" class="form-control"
+                            style="width: 20vw;" name="key" id="key" value="<%= key%>"></h1>
+                </div>
+                <div class="mb-3">
+                    <h1><span class="badge bg-primary mb-2">Initialization vector</span>
+                        <input type="text" class="form-control" style="width: 20vw;" name="msg" id="msg"
+                            value="<%= iv%>">
+                    </h1>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </center>
+
+        <%- include('../partials/footer.ejs')%>
+</body>
+
+</html>
