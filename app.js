@@ -2,13 +2,14 @@ const express = require("express");
 const app = express();
 const crypto = require("crypto");
 
-const key = crypto.randomBytes(32);
-//AES Advanced Encryption Standard CBC Cipher Block Chain Mode
-const algo = "aes-256-cbc";
-//Initialization Vector
-const iv = crypto.randomBytes(16);
+const algo = "aes-256-cbc"; //AES Advanced Encryption Standard CBC Cipher Block Chain Mode
+let key = null;
+let iv = null; //Initialization Vector
+const generate = async () => {
+  key = crypto.randomBytes(32);
+  iv = crypto.randomBytes(16);
+};
 
-console.log(key.toString());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -30,16 +31,17 @@ const decrypt = (data) => {
 };
 
 app.get("/", (req, res) => {
+  generate();
   res.render("index", {
     title: "Hello",
-    key: key.toString('ascii'),
-    iv: iv.toString('ascii'),
+    key: key.toString("ascii"),
+    iv: iv.toString("ascii"),
     encrypted_data,
   });
 });
 
 app.get("/decryption", (req, res) => {
-  res.render("decrypter", { title: "Decrypter",decrypted_data });
+  res.render("decrypter", { title: "Decrypter", decrypted_data });
 });
 app.post("/encrypt", (req, res) => {
   let msg = req.body.message;
@@ -53,7 +55,7 @@ app.post("/decrypt", (req, res) => {
   let key = req.body.key;
   let iv = req.body.iv;
   decrypted_data = decrypt(msg);
-  console.log('Encripted',encrypted_data);
+  console.log("Encripted", encrypted_data);
   res.redirect("/decryption");
 });
 
